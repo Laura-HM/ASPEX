@@ -1,44 +1,44 @@
 --Used PostgreSQL
 
 /*
- Что нужно сделать:
-1. Написать update запросы для предотвращения возможных ограничений и оптимизации изначальных таблиц. В комментариях укажите почему такие изменения нужны.
+ Р§С‚Рѕ РЅСѓР¶РЅРѕ СЃРґРµР»Р°С‚СЊ:
+1. РќР°РїРёСЃР°С‚СЊ update Р·Р°РїСЂРѕСЃС‹ РґР»СЏ РїСЂРµРґРѕС‚РІСЂР°С‰РµРЅРёСЏ РІРѕР·РјРѕР¶РЅС‹С… РѕРіСЂР°РЅРёС‡РµРЅРёР№ Рё РѕРїС‚РёРјРёР·Р°С†РёРё РёР·РЅР°С‡Р°Р»СЊРЅС‹С… С‚Р°Р±Р»РёС†. Р’ РєРѕРјРјРµРЅС‚Р°СЂРёСЏС… СѓРєР°Р¶РёС‚Рµ РїРѕС‡РµРјСѓ С‚Р°РєРёРµ РёР·РјРµРЅРµРЅРёСЏ РЅСѓР¶РЅС‹.
 
-Ответы:
-1. Так как Update является DML командой (используется для обновления существующих записей в таблице в базе данных, которых у нас нет на данный момент),
- то с помощью нее нельзя изменять DDL объекты. Для того, чтобы изменить какие-либо ограничения (Constraints),необходимо использовать DDL команду ALTER.
-  Например:
+РћС‚РІРµС‚С‹:
+1. РўР°Рє РєР°Рє Update СЏРІР»СЏРµС‚СЃСЏ DML РєРѕРјР°РЅРґРѕР№ (РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёС… Р·Р°РїРёСЃРµР№ РІ С‚Р°Р±Р»РёС†Рµ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…, РєРѕС‚РѕСЂС‹С… Сѓ РЅР°СЃ РЅРµС‚ РЅР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚),
+ С‚Рѕ СЃ РїРѕРјРѕС‰СЊСЋ РЅРµРµ РЅРµР»СЊР·СЏ РёР·РјРµРЅСЏС‚СЊ DDL РѕР±СЉРµРєС‚С‹. Р”Р»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РёР·РјРµРЅРёС‚СЊ РєР°РєРёРµ-Р»РёР±Рѕ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ (Constraints),РЅРµРѕР±С…РѕРґРёРјРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ DDL РєРѕРјР°РЅРґСѓ ALTER.
+  РќР°РїСЂРёРјРµСЂ:
  
  */
- ALTER TABLE client ALTER COLUMN country DROP NOT NULL; -- можно сделать необязательным заполнение данного атрибута
+ ALTER TABLE client ALTER COLUMN country DROP NOT NULL; -- РјРѕР¶РЅРѕ СЃРґРµР»Р°С‚СЊ РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рј Р·Р°РїРѕР»РЅРµРЅРёРµ РґР°РЅРЅРѕРіРѕ Р°С‚СЂРёР±СѓС‚Р°
 
- ALTER TABLE rentbook RENAME COLUMN date TO rent_date;--лучше использовать другое название клонки, так date употребляется как тип данных
+ ALTER TABLE rentbook RENAME COLUMN date TO rent_date;--Р»СѓС‡С€Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РґСЂСѓРіРѕРµ РЅР°Р·РІР°РЅРёРµ РєР»РѕРЅРєРё, С‚Р°Рє date СѓРїРѕС‚СЂРµР±Р»СЏРµС‚СЃСЏ РєР°Рє С‚РёРї РґР°РЅРЅС‹С…
  
- ALTER TABLE rentbook RENAME COLUMN time TO rent_time;--лучше использовать другое название клонки, так time употребляется как тип времени
+ ALTER TABLE rentbook RENAME COLUMN time TO rent_time;--Р»СѓС‡С€Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РґСЂСѓРіРѕРµ РЅР°Р·РІР°РЅРёРµ РєР»РѕРЅРєРё, С‚Р°Рє time СѓРїРѕС‚СЂРµР±Р»СЏРµС‚СЃСЏ РєР°Рє С‚РёРї РІСЂРµРјРµРЅРё
 
- ALTER TABLE rentbook ALTER COLUMN rent_date SET DEFAULT CURRENT_DATE;--можно упростить заполнение даты, если нужно указать текущую дату
+ ALTER TABLE rentbook ALTER COLUMN rent_date SET DEFAULT CURRENT_DATE;--РјРѕР¶РЅРѕ СѓРїСЂРѕСЃС‚РёС‚СЊ Р·Р°РїРѕР»РЅРµРЅРёРµ РґР°С‚С‹, РµСЃР»Рё РЅСѓР¶РЅРѕ СѓРєР°Р·Р°С‚СЊ С‚РµРєСѓС‰СѓСЋ РґР°С‚Сѓ
 
- ALTER TABLE servicebook ALTER COLUMN date SET DEFAULT CURRENT_DATE;--можно упростить заполнение даты, если нужно указать текущую дату
+ ALTER TABLE servicebook ALTER COLUMN date SET DEFAULT CURRENT_DATE;--РјРѕР¶РЅРѕ СѓРїСЂРѕСЃС‚РёС‚СЊ Р·Р°РїРѕР»РЅРµРЅРёРµ РґР°С‚С‹, РµСЃР»Рё РЅСѓР¶РЅРѕ СѓРєР°Р·Р°С‚СЊ С‚РµРєСѓС‰СѓСЋ РґР°С‚Сѓ
 
- ALTER TABLE servicebook RENAME COLUMN date TO service_date;--лучше использовать другое название клонки, так date употребляется как тип данных
+ ALTER TABLE servicebook RENAME COLUMN date TO service_date;--Р»СѓС‡С€Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РґСЂСѓРіРѕРµ РЅР°Р·РІР°РЅРёРµ РєР»РѕРЅРєРё, С‚Р°Рє date СѓРїРѕС‚СЂРµР±Р»СЏРµС‚СЃСЏ РєР°Рє С‚РёРї РґР°РЅРЅС‹С…
 
- ALTER TABLE staff RENAME COLUMN date TO start_date;--лучше использовать другое название клонки, так date употребляется как тип данных
+ ALTER TABLE staff RENAME COLUMN date TO start_date;--Р»СѓС‡С€Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РґСЂСѓРіРѕРµ РЅР°Р·РІР°РЅРёРµ РєР»РѕРЅРєРё, С‚Р°Рє date СѓРїРѕС‚СЂРµР±Р»СЏРµС‚СЃСЏ РєР°Рє С‚РёРї РґР°РЅРЅС‹С…
 
- ALTER TABLE staff ALTER COLUMN passport DROP NOT NULL;-- можно сделать необязательным заполнение данного атрибута
+ ALTER TABLE staff ALTER COLUMN passport DROP NOT NULL;-- РјРѕР¶РЅРѕ СЃРґРµР»Р°С‚СЊ РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рј Р·Р°РїРѕР»РЅРµРЅРёРµ РґР°РЅРЅРѕРіРѕ Р°С‚СЂРёР±СѓС‚Р°
 
- ALTER TABLE staff ALTER COLUMN start_date SET DEFAULT CURRENT_DATE;--можно упростить заполнение даты, если нужно указать текущую дату
+ ALTER TABLE staff ALTER COLUMN start_date SET DEFAULT CURRENT_DATE;--РјРѕР¶РЅРѕ СѓРїСЂРѕСЃС‚РёС‚СЊ Р·Р°РїРѕР»РЅРµРЅРёРµ РґР°С‚С‹, РµСЃР»Рё РЅСѓР¶РЅРѕ СѓРєР°Р·Р°С‚СЊ С‚РµРєСѓС‰СѓСЋ РґР°С‚Сѓ
 
- ALTER TABLE detail RENAME COLUMN type TO detail_type;--лучше использовать другое название клонки, так date употребляется как тип данных
+ ALTER TABLE detail RENAME COLUMN type TO detail_type;--Р»СѓС‡С€Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РґСЂСѓРіРѕРµ РЅР°Р·РІР°РЅРёРµ РєР»РѕРЅРєРё, С‚Р°Рє date СѓРїРѕС‚СЂРµР±Р»СЏРµС‚СЃСЏ РєР°Рє С‚РёРї РґР°РЅРЅС‹С…
  
- -- также можно методоми выше поменять название колонок Name
-/* 2. Разбить таблицы на меры и измерения.
- * Ответ: Данные таблицы можно разбить на таблицы измерения и фактовую таблицу, которая в свою очередь содержит меры.
- * Фактовая таблицы: rentbook, servicebook
- * Таблицы измерения: staff, client, detail, bicycle, а detailforbicycle - это связующая таблица между таблицами detail и bicycle, так как у них связь
- * между собой много ко многому.
+ -- С‚Р°РєР¶Рµ РјРѕР¶РЅРѕ РјРµС‚РѕРґРѕРјРё РІС‹С€Рµ РїРѕРјРµРЅСЏС‚СЊ РЅР°Р·РІР°РЅРёРµ РєРѕР»РѕРЅРѕРє Name
+/* 2. Р Р°Р·Р±РёС‚СЊ С‚Р°Р±Р»РёС†С‹ РЅР° РјРµСЂС‹ Рё РёР·РјРµСЂРµРЅРёСЏ.
+ * РћС‚РІРµС‚: Р”Р°РЅРЅС‹Рµ С‚Р°Р±Р»РёС†С‹ РјРѕР¶РЅРѕ СЂР°Р·Р±РёС‚СЊ РЅР° С‚Р°Р±Р»РёС†С‹ РёР·РјРµСЂРµРЅРёСЏ Рё С„Р°РєС‚РѕРІСѓСЋ С‚Р°Р±Р»РёС†Сѓ, РєРѕС‚РѕСЂР°СЏ РІ СЃРІРѕСЋ РѕС‡РµСЂРµРґСЊ СЃРѕРґРµСЂР¶РёС‚ РјРµСЂС‹.
+ * Р¤Р°РєС‚РѕРІР°СЏ С‚Р°Р±Р»РёС†С‹: rentbook, servicebook
+ * РўР°Р±Р»РёС†С‹ РёР·РјРµСЂРµРЅРёСЏ: staff, client, detail, bicycle, Р° detailforbicycle - СЌС‚Рѕ СЃРІСЏР·СѓСЋС‰Р°СЏ С‚Р°Р±Р»РёС†Р° РјРµР¶РґСѓ С‚Р°Р±Р»РёС†Р°РјРё detail Рё bicycle, С‚Р°Рє РєР°Рє Сѓ РЅРёС… СЃРІСЏР·СЊ
+ * РјРµР¶РґСѓ СЃРѕР±РѕР№ РјРЅРѕРіРѕ РєРѕ РјРЅРѕРіРѕРјСѓ.
  */
  
--- 3. Написать MDX скрипт создания OLAP куба из представленных таблиц.
+-- 3. РќР°РїРёСЃР°С‚СЊ MDX СЃРєСЂРёРїС‚ СЃРѕР·РґР°РЅРёСЏ OLAP РєСѓР±Р° РёР· РїСЂРµРґСЃС‚Р°РІР»РµРЅРЅС‹С… С‚Р°Р±Р»РёС†.
 --1)
  SELECT r.id, r.rent_date, r.rent_time, r.paid, r.bicycleid, b.brand, b.rentprice,
  r.clientid, c."name" AS client_name, c.passport AS client_passport, c.country AS client_country,
@@ -58,7 +58,7 @@
  GROUP BY b.brand, d."name", st."name";
 
 
-/*4. Написать 5 MDX произвольных запросов на отображение сводных данных. Как минимум два запроса должны затрагивать данные из четырех таблиц.
+/*4. РќР°РїРёСЃР°С‚СЊ 5 MDX РїСЂРѕРёР·РІРѕР»СЊРЅС‹С… Р·Р°РїСЂРѕСЃРѕРІ РЅР° РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ СЃРІРѕРґРЅС‹С… РґР°РЅРЅС‹С…. РљР°Рє РјРёРЅРёРјСѓРј РґРІР° Р·Р°РїСЂРѕСЃР° РґРѕР»Р¶РЅС‹ Р·Р°С‚СЂР°РіРёРІР°С‚СЊ РґР°РЅРЅС‹Рµ РёР· С‡РµС‚С‹СЂРµС… С‚Р°Р±Р»РёС†.
 */
 
 --1)
@@ -95,7 +95,7 @@ WHERE st.start_date BETWEEN '2020-01-01' AND '2020-12-31'
 
 
 
--- создаем таблицы ниже
+-- СЃРѕР·РґР°РµРј С‚Р°Р±Р»РёС†С‹ РЅРёР¶Рµ
 
 CREATE TABLE Bicycle
 
@@ -105,7 +105,7 @@ Id int GENERATED BY DEFAULT AS IDENTITY NOT NULL,
 
 Brand varchar(50) NOT NULL,
 
-RentPrice int NOT NULL, -- цена аренды
+RentPrice int NOT NULL, -- С†РµРЅР° Р°СЂРµРЅРґС‹
 
 primary key(Id)
 
@@ -137,13 +137,13 @@ Name varchar(10) NOT NULL,
 
 Passport varchar(50) NOT NULL,
 
-Date date NOT NULL, -- дата начала работы
+Date date NOT NULL, -- РґР°С‚Р° РЅР°С‡Р°Р»Р° СЂР°Р±РѕС‚С‹
 
 primary key(Id)
 
 );
 
-CREATE TABLE Detail -- запчасти велосипеда
+CREATE TABLE Detail -- Р·Р°РїС‡Р°СЃС‚Рё РІРµР»РѕСЃРёРїРµРґР°
 
 (
 
@@ -151,9 +151,9 @@ Id int GENERATED BY DEFAULT AS IDENTITY NOT NULL,
 
 Brand varchar(50) NOT NULL,
 
-Type varchar(50) NOT NULL, -- тип детали (цепь, звезда, etc.)
+Type varchar(50) NOT NULL, -- С‚РёРї РґРµС‚Р°Р»Рё (С†РµРїСЊ, Р·РІРµР·РґР°, etc.)
 
-Name varchar(50) NOT NULL, -- название детали
+Name varchar(50) NOT NULL, -- РЅР°Р·РІР°РЅРёРµ РґРµС‚Р°Р»Рё
 
 Price int NOT NULL,
 
@@ -161,7 +161,7 @@ primary key(Id)
 
 );
 
-CREATE TABLE DetailForBicycle -- список деталей подходящих к велосипедам
+CREATE TABLE DetailForBicycle -- СЃРїРёСЃРѕРє РґРµС‚Р°Р»РµР№ РїРѕРґС…РѕРґСЏС‰РёС… Рє РІРµР»РѕСЃРёРїРµРґР°Рј
 
 (
 
@@ -172,7 +172,7 @@ DetailId int NOT NULL,
 FOREIGN KEY (BicycleId) REFERENCES Bicycle (Id), FOREIGN KEY (DetailId) REFERENCES Detail (Id)
 );
 
-CREATE TABLE ServiceBook -- сервисное обслуживание велосипедов
+CREATE TABLE ServiceBook -- СЃРµСЂРІРёСЃРЅРѕРµ РѕР±СЃР»СѓР¶РёРІР°РЅРёРµ РІРµР»РѕСЃРёРїРµРґРѕРІ
 
 (
 
@@ -182,24 +182,24 @@ DetailId int NOT NULL,
 
 Date date NOT NULL,
 
-Price int NOT NULL, -- цена работы
+Price int NOT NULL, -- С†РµРЅР° СЂР°Р±РѕС‚С‹
 
 StaffId int NOT NULL,
 
 FOREIGN KEY (BicycleId) REFERENCES Bicycle (Id), FOREIGN KEY (StaffId) REFERENCES Staff (Id), FOREIGN KEY (DetailId) REFERENCES Detail (Id) 
 );
 
-CREATE TABLE RentBook -- аренда велосипеда клиентом
+CREATE TABLE RentBook -- Р°СЂРµРЅРґР° РІРµР»РѕСЃРёРїРµРґР° РєР»РёРµРЅС‚РѕРј
 
 (
 
 Id int GENERATED BY DEFAULT AS IDENTITY NOT NULL,
 
-Date date NOT NULL, -- дата аренды
+Date date NOT NULL, -- РґР°С‚Р° Р°СЂРµРЅРґС‹
 
-Time int NOT NULL, -- время на сколько взята аренда в часах
+Time int NOT NULL, -- РІСЂРµРјСЏ РЅР° СЃРєРѕР»СЊРєРѕ РІР·СЏС‚Р° Р°СЂРµРЅРґР° РІ С‡Р°СЃР°С…
 
-Paid bit NOT NULL, -- 1 оплатил; 0 не оплатил
+Paid bit NOT NULL, -- 1 РѕРїР»Р°С‚РёР»; 0 РЅРµ РѕРїР»Р°С‚РёР»
 
 BicycleId int NOT NULL,
 
